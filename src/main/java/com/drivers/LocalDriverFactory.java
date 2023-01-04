@@ -15,14 +15,12 @@ public final class LocalDriverFactory {
 
     public static WebDriver getDriver() {
         WebDriver driver = null;
-
-        if (ConfigFactory.getConfig().browser() == BrowserType.FIREFOX) {
-            driver = FirefoxManager.getDriver();
-        } else {
-            driver = ChromeManager.getDriver();
-        }
-
-
+        if (isBrowserChrome()) driver = ChromeManager.getDriver();
+        else driver = FirefoxManager.getDriver();
         return driver;
+    }
+
+    private static boolean isBrowserChrome() {
+        return ConfigFactory.getConfig().browser() == BrowserType.CHROME;
     }
 }
